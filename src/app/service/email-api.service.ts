@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { formatDate} from '@angular/common';
+import { INTERNAL_BROWSER_PLATFORM_PROVIDERS } from '@angular/platform-browser/src/browser';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,7 @@ export class EmailApiService {
 
   mydate = new Date()
   constructor(private http: HttpClient, private router: Router) { }
-
+  //Login Verification
   verifyLogin(email, password){
     const object = {
       email: email,
@@ -21,6 +22,8 @@ export class EmailApiService {
     })
   }
 
+  //Inbox
+
   inbox(email){
     const url = "http://localhost:4000/Inbox/"+email
     return this.http.get(url).pipe((map(res=>{
@@ -29,6 +32,8 @@ export class EmailApiService {
     })))
   }
 
+
+  //Compose Email
   composeEmail(t_email, f_email, message){
     var object = {
       t_email: t_email,
@@ -41,6 +46,7 @@ export class EmailApiService {
     });
   }
 
+  //Email Sent
   sentEmail(email){
     const url = "http://localhost:4000/sent/"+email
     return this.http.get(url).pipe((map(res=>{
@@ -48,12 +54,35 @@ export class EmailApiService {
       return res; 
     })))
   }
-
+  //Email Deleted
   deleteEmail(id){
-    const url = "http://localhost:4000/delete"
+    const url = "http://localhost:4000/delete/"+id;
     return this.http.delete(url).pipe((map(res=>{
       console.log(res)
       return res; 
     })))
+
+  }
+
+  //Email Archived
+  archiveMessage(id){
+    console.log(id);
+    const url = "http://localhost:4000/archive";
+
+    return this.http.post("http://localhost:4000/archive", id).pipe(map(res=>{
+      this.router.navigate(['/inbox',res])
+    }))
+  }
+
+  //Search Email
+  searchEmail(email){
+    const url = "http://localhost:4000/search"+email;
+    return this.http.get(url).pipe(map(res=>{
+      return res;
+    }))
+  }
+
+  routeEmail(email){
+    this.router.navigate(['/search', email]);
   }
 }

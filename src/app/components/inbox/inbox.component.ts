@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import inboxMail from '../../models/Inbox';
 import { EmailApiService } from '../../service/email-api.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-inbox',
@@ -10,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InboxComponent implements OnInit {
   inboxmessage: inboxMail[]
-  constructor(private es: EmailApiService, private route: ActivatedRoute) { }
+  searchForm: FormGroup
+  constructor(private fb : FormBuilder,private es: EmailApiService, private route: ActivatedRoute) { this.createForm() }
 
   ngOnInit() {
     const param = this.route.snapshot.params.email;
@@ -20,8 +22,22 @@ export class InboxComponent implements OnInit {
     });
   }
 
+  createForm(){
+    this.searchForm = this.fb.group({
+      email: ['',[Validators.required,Validators.email]],
+    });
+  }
+
   deleteMessage(id){
     this.es.deleteEmail(id).subscribe(res=>{console.log("Message Deleted")});
   }
+  archiveMessage(id){
+    this.es.archiveMessage(id).subscribe(res=>{console.log("Message Archived")})
+  }
 
+  searchEmail(){
+    this.es.routeEmail(this.searchForm.value.email);
+  }
+
+  
 }

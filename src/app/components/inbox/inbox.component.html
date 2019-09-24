@@ -14,21 +14,26 @@
       <td>{{inbox.Message}}</td>
       <td>{{inbox.Date}}</td>
       <td><button (click) = "deleteMessage(inbox._id)" class ="btn btn-primary">Delete</button></td>
-      <td><a routerLink = "archive"><button (click) = "deleteMessage(inbox._id)" class ="btn btn-primary">Archive</button></a></td>
+      <td><button (click) = "archiveMessage(inbox._id)" class ="btn btn-primary">Archive</button></td>
     </tr>
   </tbody>
 
 </table>
-<a routerLink = "composeEmail">Compose</a><br/>
 
-<a routerLink = "sent">Sent</a>
-<!-- <div class = "card">
+
+<div class = "card">
     <div class = "card-body">
-      <form>
+        <form [formGroup] = "searchForm" (ngSubmit) = "searchEmail()">
         <div class ='form-group'>
-          <input type = "text" class="form-control" id = "email"/>
-          <button class = "btn btn-primary" type ="submit"> Search</button>
+          <input type = "text" class="form-control" id = "email" formControlName="email"/>
+        </div>
+        <div class="form-group">
+            <button class = "btn btn-primary" type ="submit"> Search</button>
         </div>
       </form>
     </div>
-</div> -->
+</div>
+
+<a routerLink = "composeEmail">Compose</a><br/>
+
+<a routerLink = "sent">Sent</a><br/>

@@ -1,3 +1,18 @@
-<p>
-  search works!
-</p>
+<h1>Your Search Results</h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <td>Receiver Name</td>
+        <td>Message</td>
+        <td>Date</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let inbox of inboxmessage">
+        <td>{{inbox.R_email}}</td>
+        <td>{{inbox.Message}}</td>
+        <td>{{inbox.Date}}</td>
+      </tr>
+    </tbody>
+  
+  </table>

@@ -22,7 +22,7 @@ const routes: Routes = [
     component: InboxComponent,
   },
   {
-    path: 'search',
+    path: 'search/:email',
     component: SearchComponent
   },
   {
