@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "B:/Web Projects/DeveloperTest/mailApplication/node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
