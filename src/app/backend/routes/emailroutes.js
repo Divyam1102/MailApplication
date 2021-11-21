@@ -1,4 +1,5 @@
-const express = require('express');
+import express from "express";
+
 const app = express();
 const email_Routes = express.Router();
 
@@ -104,4 +105,4 @@ email_Routes.route('/search/:email').get(function(req,res){
         }
     })
 })
-module.exports = email_Routes;
+export  email_Routes;

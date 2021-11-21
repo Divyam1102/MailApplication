@@ -1,13 +1,16 @@
-var express = require('express'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    config = require('./db'),
-    cors = require('cors');
+import  express  from "express";
+import path  from "path";
+import bodyParser  from "body-parser";
+import  mongoose  from "mongoose";
+//import { config }  from "./db.js";
+import  cors  from "cors";
+import { email_Routes } from "../backend/routes/emailroutes.js";
 
-const email_Routes = require('../backend/routes/emailroutes');
+//const email_Routes = require('../backend/routes/emailroutes');
 const app = express();
-
+const config = {
+		DB:'mongodb://localhost:27017/emailApplication'
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
