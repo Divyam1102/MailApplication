@@ -4,7 +4,7 @@ import bodyParser  from "body-parser";
 import  mongoose  from "mongoose";
 //import { config }  from "./db.js";
 import  cors  from "cors";
-import { email_Routes } from "../backend/routes/emailroutes.js";
+import email_Routes  from "../backend/routes/emailroutes.js";
 
 //const email_Routes = require('../backend/routes/emailroutes');
 const app = express();

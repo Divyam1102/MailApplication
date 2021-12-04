@@ -1,12 +1,20 @@
+/*If we are using ES6 export default to export the variable then we don't need to use curly braces to import 
+ In order to use ES6 module export and import, either put "type":"module" in package.json or rename the module file name
+ with mjs extension i.e. if file name is login.js than it should be login.mjs */
 import express from "express";
+import  LoginModel  from "../models/login.js";
+import  InboxModel  from "../models/inbox.js";
+import  ComposeModel  from "../models/Compose.js";
+import  ArchiveModel  from "../models/Archive.js";
 
 const app = express();
 const email_Routes = express.Router();
 
-let LoginModel = require('../models/login');
+/*require function not supported by Nodejs 17
+ * let LoginModel = require('../models/login');
 let InboxModel = require('../models/inbox');
 let ComposeModel = require('../models/Compose');
-let ArchiveModel = require('../models/Archive');
+let ArchiveModel = require('../models/Archive');*/
 
 //Verify Login Information
 email_Routes.route('/loginEmail').post(function(req,res){
@@ -105,4 +113,7 @@ email_Routes.route('/search/:email').get(function(req,res){
         }
     })
 })
-export  email_Routes;
+
+/*Converting the CommonJS export to ES6 export
+ * module.exports = email_Routes This syntax is used by CommonJS */
+export default email_Routes; //This Syntax is used by ES6
